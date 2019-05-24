@@ -1,0 +1,1 @@
+{"version":3,"sources":["src/scss/index.scss"],"names":[],"mappings":"AAGA;EACI,OAJI;;AAKJ;EACI,OALC","file":"scss.8c25d549.css","sourceRoot":"..","sourcesContent":["$color: #ff00ff;\n$color2: #ffaa33;\n\nbody{\n    color: $color;\n    p{\n        color: $color2;\n    }\n}"]}
