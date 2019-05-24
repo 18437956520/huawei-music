@@ -5,6 +5,7 @@
 
 body {
   background-color: #090A42;
+  font-family: "regular";
 }
 
 #player {
@@ -56,16 +57,39 @@ body {
   background: url(/effect-no-move.e6a51026.svg) 0 0 no-repeat;
   width: 70vw;
   height: 70vw;
+  animation: rotate 10s linear infinite;
 }
 #player .area-effect .panel-effect .effect .effect-2 {
   background: url(/effect-move1.8d0ce205.svg) 0 0 no-repeat;
   width: 55vw;
   height: 55vw;
+  animation: rotate 10s linear infinite reverse;
 }
 #player .area-effect .panel-effect .effect .effect-3 {
   background: url(/effect-move2.143040a0.svg) 0 0 no-repeat;
   height: 22vw;
   width: 22vw;
+  animation: rotate 10s linear infinite;
+}
+#player .area-effect .panel-effect .lyrics {
+  text-align: center;
+}
+#player .area-effect .panel-effect .lyrics p {
+  font-size: 13px;
+  color: #868AAF;
+  margin-top: 8px;
+}
+#player .area-effect .panel-effect .lyrics p.current {
+  color: #FFFFFF;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /*# sourceMappingURL=/scss.8c25d549.css.map */

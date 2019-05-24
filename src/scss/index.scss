@@ -12,6 +12,7 @@ $color3: #0315FF;
 
 body {
     background-color: #090A42;
+    font-family: 'regular';
 }
 
 #player {
@@ -56,7 +57,6 @@ body {
         }
 
         .panel-effect {
-
             .effect {
                 position: relative;
                 display: flex;
@@ -73,20 +73,47 @@ body {
                     background: url(../svg/effect-no-move.svg) 0 0 no-repeat;
                     width: 70vw;
                     height: 70vw;
+                    animation: rotate 10s linear infinite;
                 }
 
                 .effect-2 {
                     background: url(../svg/effect-move1.svg) 0 0 no-repeat;
                     width: 55vw;
                     height: 55vw;
+                    animation: rotate 10s linear infinite reverse;
                 }
-                
+
                 .effect-3 {
                     background: url(../svg/effect-move2.svg) 0 0 no-repeat;
                     height: 22vw;
                     width: 22vw;
+                    animation: rotate 10s linear infinite;
+                }
+            }
+
+            .lyrics {
+                text-align: center;
+
+                p {
+                    font-size: 13px;
+                    color: $color1;
+                    margin-top: 8px;
+
+                    &.current {
+                        color: $color;
+                    }
                 }
             }
         }
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0)
+    }
+
+    100% {
+        transform: rotate(360deg)
     }
 }
