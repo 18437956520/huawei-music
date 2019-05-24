@@ -5,48 +5,86 @@ $color2-dark: darken($color2, 10%);
 $color2-darker: darken($color2, 30%);
 $color3: #0315FF;
 
-*{
+* {
     margin: 0;
     padding: 0;
 }
 
-body{
+body {
     background-color: #090A42;
 }
 
-#player{
+#player {
     height: 100vh;
-    .header{
+
+    .header {
         text-align: center;
-        h1{
+
+        h1 {
             color: $color;
             font-size: 20px;
             padding-top: 20px;
         }
-        p{
+
+        p {
             color: $color1;
             font-size: 12px;
         }
     }
 
-    .area-effect{
-        .balls{
-            display: flex; 
+    .area-effect {
+        .balls {
+            display: flex;
             justify-content: center;
             align-items: center;
             margin-top: 14px;
-            span{
+
+            span {
                 display: block;
                 width: 5px;
                 height: 5px;
                 border-radius: 50%;
                 background: $color2-darker;
                 margin: 0 4px;
-                                
-                &.current{
+
+                &.current {
                     width: 8px;
                     height: 8px;
                     background: $color2;
+                }
+            }
+        }
+
+        .panel-effect {
+
+            .effect {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 60vh;
+
+                >div {
+                    background: contain;
+                    position: absolute;
+                }
+
+                .effect-1 {
+                    background: url(../svg/effect-no-move.svg) 0 0 no-repeat;
+                    width: 70vw;
+                    height: 70vw;
+                }
+
+                .effect-2 {
+                    background: url(../svg/effect-move1.svg) 0 0 no-repeat;
+                    width: 55vw;
+                    height: 55vw;
+                }
+                
+                .effect-3 {
+                    background: url(../svg/effect-move2.svg) 0 0 no-repeat;
+                    height: 22vw;
+                    width: 22vw;
                 }
             }
         }
