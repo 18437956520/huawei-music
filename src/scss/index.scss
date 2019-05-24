@@ -106,6 +106,17 @@ body {
             }
         }
     }
+    .buttons{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        svg{
+            width: 24px;
+            height: 24px;
+            margin: 5px 20px;
+        }
+    }
 }
 
 @keyframes rotate {
