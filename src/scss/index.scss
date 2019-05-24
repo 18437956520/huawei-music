@@ -1,0 +1,54 @@
+$color: #FFFFFF;
+$color1: #868AAF;
+$color2: #FD0DAD;
+$color2-dark: darken($color2, 10%);
+$color2-darker: darken($color2, 30%);
+$color3: #0315FF;
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: #090A42;
+}
+
+#player{
+    height: 100vh;
+    .header{
+        text-align: center;
+        h1{
+            color: $color;
+            font-size: 20px;
+            padding-top: 20px;
+        }
+        p{
+            color: $color1;
+            font-size: 12px;
+        }
+    }
+
+    .area-effect{
+        .balls{
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+            margin-top: 14px;
+            span{
+                display: block;
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                background: $color2-darker;
+                margin: 0 4px;
+                                
+                &.current{
+                    width: 8px;
+                    height: 8px;
+                    background: $color2;
+                }
+            }
+        }
+    }
+}
