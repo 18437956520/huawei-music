@@ -121,15 +121,16 @@ body {
   background: #FD0DAD;
   position: relative;
 }
-#player .bar-area .bar::after {
+#player .bar-area .bar .progress::after {
   content: "";
   position: absolute;
   right: 0;
-  top: -7px;
+  top: -6px;
   display: block;
   width: 16px;
   height: 16px;
-  background: url();
+  background: url(/progress.798a5c76.svg) 0 0 no-repeat;
+  background-size: contain;
 }
 
 @keyframes rotate {
