@@ -92,6 +92,45 @@ body {
   height: 24px;
   margin: 5px 20px;
 }
+#player .bar-area {
+  color: #868AAF;
+  font-size: 12px;
+  display: flex;
+  padding: 0 20px;
+  margin-top: 20px;
+  align-items: center;
+}
+#player .bar-area .time-start {
+  order: 1;
+}
+#player .bar-area .time-end {
+  order: 3;
+}
+#player .bar-area .bar {
+  order: 2;
+  flex: 1;
+  height: 4px;
+  background: #0315FF;
+  border-radius: 2px;
+  margin: 0 10px;
+}
+#player .bar-area .bar .progress {
+  width: 30%;
+  height: 100%;
+  border-radius: 2px;
+  background: #FD0DAD;
+  position: relative;
+}
+#player .bar-area .bar::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -7px;
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: url();
+}
 
 @keyframes rotate {
   0% {
