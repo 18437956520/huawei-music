@@ -62,8 +62,26 @@ p {
 
     .panels {
         height: calc(100vh - 270px);
+        width: 200vw;
+        display: flex;
+        transition: all 0.3s;
+        align-items: center;
+
+        &.panel1 {
+            transform: translateX(0vw);
+        }
+
+        &.panel2 {
+            transform: translateX(-100vw);
+        }
 
         .panel-effect {
+            width: 100vw;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
             .effect {
                 position: relative;
                 display: flex;
@@ -101,14 +119,6 @@ p {
             .lyrics {
                 text-align: center;
 
-                @media screen and (min-height: 667px) {
-                    padding-top: 15%;
-                }
-
-                @media screen and (min-height: 736px) {
-                    padding-top: 25%;
-                }
-
                 p {
                     font-size: 13px;
                     color: $color1;
@@ -120,6 +130,11 @@ p {
                 }
             }
 
+        }
+
+        .panel-lyrics {
+            width: 100vw;
+            height: 100%;
         }
     }
 
