@@ -31,9 +31,7 @@ body {
             color: $color1;
             font-size: 12px;
         }
-    }
 
-    .area-effect {
         .balls {
             display: flex;
             justify-content: center;
@@ -55,130 +53,136 @@ body {
                 }
             }
         }
+    }
 
-        .panel-effect {
-            .effect {
-                position: relative;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 60vh;
+    .panels {
+        .area-effect {
+            .panel-effect {
+                .effect {
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 60vh;
 
-                >div {
-                    background: contain;
-                    position: absolute;
+                    >div {
+                        background: contain;
+                        position: absolute;
+                    }
+
+                    .effect-1 {
+                        background: url(../svg/effect-no-move.svg) 0 0 no-repeat;
+                        width: 70vw;
+                        height: 70vw;
+                        animation: rotate 10s linear infinite;
+                    }
+
+                    .effect-2 {
+                        background: url(../svg/effect-move1.svg) 0 0 no-repeat;
+                        width: 55vw;
+                        height: 55vw;
+                        animation: rotate 10s linear infinite reverse;
+                    }
+
+                    .effect-3 {
+                        background: url(../svg/effect-move2.svg) 0 0 no-repeat;
+                        height: 22vw;
+                        width: 22vw;
+                        animation: rotate 10s linear infinite;
+                    }
                 }
 
-                .effect-1 {
-                    background: url(../svg/effect-no-move.svg) 0 0 no-repeat;
-                    width: 70vw;
-                    height: 70vw;
-                    animation: rotate 10s linear infinite;
-                }
+                .lyrics {
+                    text-align: center;
 
-                .effect-2 {
-                    background: url(../svg/effect-move1.svg) 0 0 no-repeat;
-                    width: 55vw;
-                    height: 55vw;
-                    animation: rotate 10s linear infinite reverse;
-                }
+                    p {
+                        font-size: 13px;
+                        color: $color1;
+                        margin-top: 8px;
 
-                .effect-3 {
-                    background: url(../svg/effect-move2.svg) 0 0 no-repeat;
-                    height: 22vw;
-                    width: 22vw;
-                    animation: rotate 10s linear infinite;
-                }
-            }
-
-            .lyrics {
-                text-align: center;
-
-                p {
-                    font-size: 13px;
-                    color: $color1;
-                    margin-top: 8px;
-
-                    &.current {
-                        color: $color;
+                        &.current {
+                            color: $color;
+                        }
                     }
                 }
             }
         }
     }
 
-    .buttons {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    .footer {
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-        svg {
-            width: 24px;
-            height: 24px;
-            margin: 5px 20px;
-        }
-    }
-
-    .bar-area {
-        color: $color1;
-        font-size: 12px;
-        display: flex;
-        padding: 0 20px;
-        margin-top: 20px;
-        align-items: center;
-
-        .time-start {
-            order: 1;
+            svg {
+                width: 24px;
+                height: 24px;
+                margin: 5px 20px;
+            }
         }
 
-        .time-end {
-            order: 3;
-        }
+        .bar-area {
+            color: $color1;
+            font-size: 12px;
+            display: flex;
+            padding: 0 20px;
+            margin-top: 20px;
+            align-items: center;
 
-        .bar {
-            order: 2;
-            flex: 1;
-            height: 4px;
-            background: $color3;
-            border-radius: 2px;
-            margin: 0 10px;
+            .time-start {
+                order: 1;
+            }
 
-            .progress {
-                width: 30%;
-                height: 100%;
+            .time-end {
+                order: 3;
+            }
+
+            .bar {
+                order: 2;
+                flex: 1;
+                height: 4px;
+                background: $color3;
                 border-radius: 2px;
-                background: $color2;
-                position: relative;
+                margin: 0 10px;
 
-                &::after {
-                    content: '';
-                    position: absolute;
-                    right: 0;
-                    top: -6px;
-                    display: block;
-                    width: 16px;
-                    height: 16px;
-                    background: url(../svg/progress.svg) 0 0 no-repeat;
-                    background-size: contain;
+                .progress {
+                    width: 30%;
+                    height: 100%;
+                    border-radius: 2px;
+                    background: $color2;
+                    position: relative;
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        right: 0;
+                        top: -6px;
+                        display: block;
+                        width: 16px;
+                        height: 16px;
+                        background: url(../svg/progress.svg) 0 0 no-repeat;
+                        background-size: contain;
+                    }
                 }
             }
         }
-    }
 
-    .actions{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-top: 20px;
-        padding: 0 20px;
+        .actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding: 0 20px;
 
-        svg{
-            width: 28px;
-            height: 28px;
+            svg {
+                width: 28px;
+                height: 28px;
 
-            &.btn-play-pause{
-                width: 50px;
-                height: 50px;
+                &.btn-play-pause {
+                    width: 50px;
+                    height: 50px;
+                }
             }
         }
     }

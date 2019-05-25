@@ -23,13 +23,13 @@ body {
   color: #868AAF;
   font-size: 12px;
 }
-#player .area-effect .balls {
+#player .header .balls {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 14px;
 }
-#player .area-effect .balls span {
+#player .header .balls span {
   display: block;
   width: 5px;
   height: 5px;
@@ -37,62 +37,62 @@ body {
   background: #70014b;
   margin: 0 4px;
 }
-#player .area-effect .balls span.current {
+#player .header .balls span.current {
   width: 8px;
   height: 8px;
   background: #FD0DAD;
 }
-#player .area-effect .panel-effect .effect {
+#player .panels .area-effect .panel-effect .effect {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 60vh;
 }
-#player .area-effect .panel-effect .effect > div {
+#player .panels .area-effect .panel-effect .effect > div {
   background: contain;
   position: absolute;
 }
-#player .area-effect .panel-effect .effect .effect-1 {
+#player .panels .area-effect .panel-effect .effect .effect-1 {
   background: url(/effect-no-move.e6a51026.svg) 0 0 no-repeat;
   width: 70vw;
   height: 70vw;
   animation: rotate 10s linear infinite;
 }
-#player .area-effect .panel-effect .effect .effect-2 {
+#player .panels .area-effect .panel-effect .effect .effect-2 {
   background: url(/effect-move1.8d0ce205.svg) 0 0 no-repeat;
   width: 55vw;
   height: 55vw;
   animation: rotate 10s linear infinite reverse;
 }
-#player .area-effect .panel-effect .effect .effect-3 {
+#player .panels .area-effect .panel-effect .effect .effect-3 {
   background: url(/effect-move2.143040a0.svg) 0 0 no-repeat;
   height: 22vw;
   width: 22vw;
   animation: rotate 10s linear infinite;
 }
-#player .area-effect .panel-effect .lyrics {
+#player .panels .area-effect .panel-effect .lyrics {
   text-align: center;
 }
-#player .area-effect .panel-effect .lyrics p {
+#player .panels .area-effect .panel-effect .lyrics p {
   font-size: 13px;
   color: #868AAF;
   margin-top: 8px;
 }
-#player .area-effect .panel-effect .lyrics p.current {
+#player .panels .area-effect .panel-effect .lyrics p.current {
   color: #FFFFFF;
 }
-#player .buttons {
+#player .footer .buttons {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-#player .buttons svg {
+#player .footer .buttons svg {
   width: 24px;
   height: 24px;
   margin: 5px 20px;
 }
-#player .bar-area {
+#player .footer .bar-area {
   color: #868AAF;
   font-size: 12px;
   display: flex;
@@ -100,13 +100,13 @@ body {
   margin-top: 20px;
   align-items: center;
 }
-#player .bar-area .time-start {
+#player .footer .bar-area .time-start {
   order: 1;
 }
-#player .bar-area .time-end {
+#player .footer .bar-area .time-end {
   order: 3;
 }
-#player .bar-area .bar {
+#player .footer .bar-area .bar {
   order: 2;
   flex: 1;
   height: 4px;
@@ -114,14 +114,14 @@ body {
   border-radius: 2px;
   margin: 0 10px;
 }
-#player .bar-area .bar .progress {
+#player .footer .bar-area .bar .progress {
   width: 30%;
   height: 100%;
   border-radius: 2px;
   background: #FD0DAD;
   position: relative;
 }
-#player .bar-area .bar .progress::after {
+#player .footer .bar-area .bar .progress::after {
   content: "";
   position: absolute;
   right: 0;
@@ -132,18 +132,18 @@ body {
   background: url(/progress.798a5c76.svg) 0 0 no-repeat;
   background-size: contain;
 }
-#player .actions {
+#player .footer .actions {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 20px;
   padding: 0 20px;
 }
-#player .actions svg {
+#player .footer .actions svg {
   width: 28px;
   height: 28px;
 }
-#player .actions svg.btn-play-pause {
+#player .footer .actions svg.btn-play-pause {
   width: 50px;
   height: 50px;
 }
