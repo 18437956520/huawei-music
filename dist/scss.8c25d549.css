@@ -8,11 +8,16 @@ body {
   font-family: "regular";
 }
 
+p {
+  letter-spacing: 2px;
+}
+
 #player {
   height: 100vh;
 }
 #player .header {
   text-align: center;
+  height: 110px;
 }
 #player .header h1 {
   color: #FFFFFF;
@@ -42,55 +47,71 @@ body {
   height: 8px;
   background: #FD0DAD;
 }
-#player .panels .area-effect .panel-effect .effect {
+#player .panels {
+  height: calc(100vh - 270px);
+}
+#player .panels .panel-effect .effect {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 60vh;
+  height: 40vh;
 }
-#player .panels .area-effect .panel-effect .effect > div {
+#player .panels .panel-effect .effect > div {
   background: contain;
   position: absolute;
 }
-#player .panels .area-effect .panel-effect .effect .effect-1 {
+#player .panels .panel-effect .effect .effect-1 {
   background: url(/effect-no-move.e6a51026.svg) 0 0 no-repeat;
   width: 70vw;
   height: 70vw;
   animation: rotate 10s linear infinite;
 }
-#player .panels .area-effect .panel-effect .effect .effect-2 {
+#player .panels .panel-effect .effect .effect-2 {
   background: url(/effect-move1.8d0ce205.svg) 0 0 no-repeat;
   width: 55vw;
   height: 55vw;
   animation: rotate 10s linear infinite reverse;
 }
-#player .panels .area-effect .panel-effect .effect .effect-3 {
+#player .panels .panel-effect .effect .effect-3 {
   background: url(/effect-move2.143040a0.svg) 0 0 no-repeat;
   height: 22vw;
   width: 22vw;
   animation: rotate 10s linear infinite;
 }
-#player .panels .area-effect .panel-effect .lyrics {
+#player .panels .panel-effect .lyrics {
   text-align: center;
 }
-#player .panels .area-effect .panel-effect .lyrics p {
+@media screen and (min-height: 667px) {
+  #player .panels .panel-effect .lyrics {
+    padding-top: 15%;
+  }
+}
+@media screen and (min-height: 736px) {
+  #player .panels .panel-effect .lyrics {
+    padding-top: 25%;
+  }
+}
+#player .panels .panel-effect .lyrics p {
   font-size: 13px;
   color: #868AAF;
   margin-top: 8px;
 }
-#player .panels .area-effect .panel-effect .lyrics p.current {
+#player .panels .panel-effect .lyrics p.current {
   color: #FFFFFF;
+}
+#player .footer {
+  height: 160px;
 }
 #player .footer .buttons {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 #player .footer .buttons svg {
   width: 24px;
   height: 24px;
-  margin: 5px 20px;
+  margin: 5px 0;
 }
 #player .footer .bar-area {
   color: #868AAF;
