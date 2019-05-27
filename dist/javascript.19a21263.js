@@ -180,7 +180,7 @@ function () {
     value: function bind() {
       var self = this;
 
-      this.root.querySelector('.btn-play-pause').onclick = function () {
+      this.root.querySelector('.btn-play').onclick = function () {
         if (this.classList.contains('playing')) {
           self.audio.pause();
           this.classList.remove('playing');
@@ -196,16 +196,16 @@ function () {
 
       this.root.querySelector('.btn-pre').onclick = function () {
         self.playPrevSong();
-        self.root.querySelector('.btn-play-pause').classList.remove('pause');
-        self.root.querySelector('.btn-play-pause').classList.add('playing');
-        self.root.querySelector('.btn-play-pause').querySelector('use').setAttribute('xlink:href', '#icon-pause');
+        self.root.querySelector('.btn-play').classList.remove('pause');
+        self.root.querySelector('.btn-play').classList.add('playing');
+        self.root.querySelector('.btn-play').querySelector('use').setAttribute('xlink:href', '#icon-pause');
       };
 
       this.root.querySelector('.btn-next').onclick = function () {
         self.playNextSong();
-        self.root.querySelector('.btn-play-pause').classList.remove('pause');
-        self.root.querySelector('.btn-play-pause').classList.add('playing');
-        self.root.querySelector('.btn-play-pause').querySelector('use').setAttribute('xlink:href', '#icon-pause');
+        self.root.querySelector('.btn-play').classList.remove('pause');
+        self.root.querySelector('.btn-play').classList.add('playing');
+        self.root.querySelector('.btn-play').querySelector('use').setAttribute('xlink:href', '#icon-pause');
       };
     }
   }, {
