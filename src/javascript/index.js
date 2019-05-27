@@ -1,16 +1,9 @@
 import './icons.js'
 import Swiper from './swiper.js'
 
-const $ = selector => document.querySelector(selector)
-const $$ = selector => document.querySelectorAll(selector)
-
-// function $(selector){
-//     return document.querySelector(selector)
-// }
-
 class Player {
     constructor(node) {
-        this.root = typeof node === 'string' ? $(node) : node
+        this.root = typeof node === 'string' ? document.querySelector(node) : node
         this.$ = selector => this.root.querySelector(selector)
         this.$$ = selector => this.root.querySelectorAll(selector)
         this.songList = []

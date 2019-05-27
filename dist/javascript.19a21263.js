@@ -270,17 +270,6 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var $ = function $(selector) {
-  return document.querySelector(selector);
-};
-
-var $$ = function $$(selector) {
-  return document.querySelectorAll(selector);
-}; // function $(selector){
-//     return document.querySelector(selector)
-// }
-
-
 var Player =
 /*#__PURE__*/
 function () {
@@ -289,7 +278,7 @@ function () {
 
     _classCallCheck(this, Player);
 
-    this.root = typeof node === 'string' ? $(node) : node;
+    this.root = typeof node === 'string' ? document.querySelector(node) : node;
 
     this.$ = function (selector) {
       return _this.root.querySelector(selector);
