@@ -11,6 +11,8 @@ const $$ = selector => document.querySelectorAll(selector)
 class Player {
     constructor(node) {
         this.root = typeof node === 'string' ? $(node) : node
+        this.$ = selector => this.root.querySelector(selector)
+        this.$$ = selector => this.root.querySelectorAll(selector)
         this.songList = []
         this.currentIndex = 0
         this.audio = new Audio()
@@ -31,7 +33,7 @@ class Player {
 
     bind() {
         let self = this
-        this.root.querySelector('.btn-play').onclick = function () {
+        this.$('.btn-play').onclick = function () {
             if (this.classList.contains('playing')) {
                 self.audio.pause()
                 this.classList.remove('playing')
@@ -45,20 +47,20 @@ class Player {
             }
         }
 
-        this.root.querySelector('.btn-pre').onclick = function () {
+        this.$('.btn-pre').onclick = function () {
             self.playPrevSong()
-            self.root.querySelector('.btn-play').classList.remove('pause')
-            self.root.querySelector('.btn-play').classList.add('playing')
-            self.root.querySelector('.btn-play').querySelector('use').setAttribute('xlink:href', '#icon-pause')
+            self.$('.btn-play').classList.remove('pause')
+            self.$('.btn-play').classList.add('playing')
+            self.$('.btn-play').querySelector('use').setAttribute('xlink:href', '#icon-pause')
         }
-        this.root.querySelector('.btn-next').onclick = function () {
+        this.$('.btn-next').onclick = function () {
             self.playNextSong()
-            self.root.querySelector('.btn-play').classList.remove('pause')
-            self.root.querySelector('.btn-play').classList.add('playing')
-            self.root.querySelector('.btn-play').querySelector('use').setAttribute('xlink:href', '#icon-pause')
+            self.$('.btn-play').classList.remove('pause')
+            self.$('.btn-play').classList.add('playing')
+            self.$('.btn-play').querySelector('use').setAttribute('xlink:href', '#icon-pause')
         }
 
-        let swiper = new Swiper(this.root.querySelector('.panels'))
+        let swiper = new Swiper(this.$('.panels'))
         swiper.on('swipLeft', function() {
             this.classList.remove('panel1')
             this.classList.add('panel2')

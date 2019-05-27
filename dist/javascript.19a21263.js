@@ -285,9 +285,20 @@ var Player =
 /*#__PURE__*/
 function () {
   function Player(node) {
+    var _this = this;
+
     _classCallCheck(this, Player);
 
     this.root = typeof node === 'string' ? $(node) : node;
+
+    this.$ = function (selector) {
+      return _this.root.querySelector(selector);
+    };
+
+    this.$$ = function (selector) {
+      return _this.root.querySelectorAll(selector);
+    };
+
     this.songList = [];
     this.currentIndex = 0;
     this.audio = new Audio();
@@ -298,14 +309,14 @@ function () {
   _createClass(Player, [{
     key: "start",
     value: function start() {
-      var _this = this;
+      var _this2 = this;
 
       fetch('https://yyyh.info/huawei-music-list/music-list.json').then(function (res) {
         return res.json();
       }).then(function (data) {
         console.log(data);
-        _this.songList = data;
-        _this.audio.src = _this.songList[_this.currentIndex].url;
+        _this2.songList = data;
+        _this2.audio.src = _this2.songList[_this2.currentIndex].url;
       });
     }
   }, {
@@ -313,7 +324,7 @@ function () {
     value: function bind() {
       var self = this;
 
-      this.root.querySelector('.btn-play').onclick = function () {
+      this.$('.btn-play').onclick = function () {
         if (this.classList.contains('playing')) {
           self.audio.pause();
           this.classList.remove('playing');
@@ -327,21 +338,21 @@ function () {
         }
       };
 
-      this.root.querySelector('.btn-pre').onclick = function () {
+      this.$('.btn-pre').onclick = function () {
         self.playPrevSong();
-        self.root.querySelector('.btn-play').classList.remove('pause');
-        self.root.querySelector('.btn-play').classList.add('playing');
-        self.root.querySelector('.btn-play').querySelector('use').setAttribute('xlink:href', '#icon-pause');
+        self.$('.btn-play').classList.remove('pause');
+        self.$('.btn-play').classList.add('playing');
+        self.$('.btn-play').querySelector('use').setAttribute('xlink:href', '#icon-pause');
       };
 
-      this.root.querySelector('.btn-next').onclick = function () {
+      this.$('.btn-next').onclick = function () {
         self.playNextSong();
-        self.root.querySelector('.btn-play').classList.remove('pause');
-        self.root.querySelector('.btn-play').classList.add('playing');
-        self.root.querySelector('.btn-play').querySelector('use').setAttribute('xlink:href', '#icon-pause');
+        self.$('.btn-play').classList.remove('pause');
+        self.$('.btn-play').classList.add('playing');
+        self.$('.btn-play').querySelector('use').setAttribute('xlink:href', '#icon-pause');
       };
 
-      var swiper = new _swiper.default(this.root.querySelector('.panels'));
+      var swiper = new _swiper.default(this.$('.panels'));
       swiper.on('swipLeft', function () {
         this.classList.remove('panel1');
         this.classList.add('panel2');
