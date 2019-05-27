@@ -1,4 +1,5 @@
 import './icons.js'
+import Swiper from './swiper.js'
 
 const $ = selector => document.querySelector(selector)
 const $$ = selector => document.querySelectorAll(selector)
@@ -56,6 +57,16 @@ class Player {
             self.root.querySelector('.btn-play').classList.add('playing')
             self.root.querySelector('.btn-play').querySelector('use').setAttribute('xlink:href', '#icon-pause')
         }
+
+        let swiper = new Swiper(this.root.querySelector('.panels'))
+        swiper.on('swipLeft', function() {
+            this.classList.remove('panel1')
+            this.classList.add('panel2')
+        })
+        swiper.on('swipRight', function() {
+            this.classList.remove('panel2')
+            this.classList.add('panel1')
+        })
     }
 
     playPrevSong() {
