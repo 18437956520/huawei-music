@@ -1,6 +1,7 @@
 import './icons.js'
 import Swiper from './swiper.js'
 
+
 class Player {
     constructor(node) {
         this.root = typeof node === 'string' ? document.querySelector(node) : node
@@ -14,6 +15,7 @@ class Player {
 
         this.start()
         this.bind()
+        // https://yyyh.info/huawei-music-list/music-list.json
     }
 
     start() {
@@ -21,7 +23,7 @@ class Player {
             .then(res => res.json())
             .then(data => {
                 this.songList = data
-                this.renderSong()
+                this.loadSong()
             })
     }
 
@@ -42,21 +44,26 @@ class Player {
         }
 
         this.$('.btn-pre').onclick = function () {
-            self.playPrevSong()
             self.$('.btn-play').classList.remove('pause')
             self.$('.btn-play').classList.add('playing')
             self.$('.btn-play').querySelector('use').setAttribute('xlink:href', '#icon-pause')
+            self.currentIndex = (self.songList.length + self.currentIndex - 1) % self.songList.length
+            self.loadSong()
+            self.playSong()
         }
+
         this.$('.btn-next').onclick = function () {
-            self.playNextSong()
             self.$('.btn-play').classList.remove('pause')
             self.$('.btn-play').classList.add('playing')
             self.$('.btn-play').querySelector('use').setAttribute('xlink:href', '#icon-pause')
+            self.currentIndex = (self.currentIndex + 1) % self.songList.length
+            self.loadSong()
+            self.playSong()
         }
 
         this.audio.ontimeupdate = function () {
-            self.renderSong()
-            self.setProgressBar()
+            self.locateLyric()
+            self.setProgerssBar()
         }
 
         let swiper = new Swiper(this.$('.panels'))
@@ -64,13 +71,14 @@ class Player {
             this.classList.remove('panel1')
             this.classList.add('panel2')
         })
+
         swiper.on('swipRight', function () {
             this.classList.remove('panel2')
             this.classList.add('panel1')
         })
     }
 
-    renderSong() {
+    loadSong() {
         let songObj = this.songList[this.currentIndex]
         this.$('.header h1').innerText = songObj.title
         this.$('.header p').innerText = songObj.author + '-' + songObj.albumn
@@ -79,16 +87,7 @@ class Player {
         this.loadLyric()
     }
 
-    playPrevSong() {
-        this.currentIndex = (this.songList.length + this.currentIndex - 1) % this.songList.length
-        this.audio.src = this.songList[this.currentIndex].url
-        console.log(this.audio)
-        this.audio.oncanplaythrough = () => this.audio.play()
-    }
-    playNextSong() {
-        this.currentIndex = (this.songList.length + this.currentIndex + 1) % this.songList.length
-        this.audio.src = this.songList[this.currentIndex].url
-        console.log(this.audio)
+    playSong() {
         this.audio.oncanplaythrough = () => this.audio.play()
     }
 
@@ -107,9 +106,9 @@ class Player {
         if (currentTime > nextLineTime && this.lyricIndex < this.lyricsArr.length - 1) {
             this.lyricIndex++
             let node = this.$('[data-time="' + this.lyricsArr[this.lyricIndex][0] + '"]')
-            this.setLyricToCenter(node)
-            this.$$('.panel-effect .lyric p')[0].innerText = this.lyricsArr[this.lyricIndex][1]
-            this.$$('.panel-effect .lyric p')[1].innerText = this.lyricsArr[this.lyricIndex+1] ? this.lyricsArr[this.lyricIndex+1][1] : ''     
+            if (node) this.setLyricToCenter(node)
+            this.$$('.panel-effect .lyrics p')[0].innerText = this.lyricsArr[this.lyricIndex][1]
+            this.$$('.panel-effect .lyrics p')[1].innerText = this.lyricsArr[this.lyricIndex + 1] ? this.lyricsArr[this.lyricIndex + 1][1] : ''
         }
     }
 
@@ -124,12 +123,12 @@ class Player {
                 let str = line.replace(/\[.+?\]/g, '')
                 line.match(/\[.+?\]/g).forEach(t => {
                     t = t.replace(/[\[\]]/g, '')
-                    let milliseconds = parseInt(t.slice(0, 2) * 60 * 1000 + parseInt(t.slice(3, 5)) * 1000 + parseInt(t.slice(6)))
+                    let milliseconds = parseInt(t.slice(0, 2)) * 60 * 1000 + parseInt(t.slice(3, 5)) * 1000 + parseInt(t.slice(6))
                     lyricsArr.push([milliseconds, str])
                 })
             })
 
-        lyricsArr.sort((v1, v2) => {
+        lyricsArr.filter(line => line[1].trim() !== '').sort((v1, v2) => {
             if (v1[0] > v2[0]) {
                 return 1
             } else {
@@ -146,18 +145,14 @@ class Player {
     }
 
     setLyricToCenter(node) {
-        let offset = node.offsetTop - this.$('.panels .panel-lyrics').offsetHeight / 2
-        if (offset > 0) {
-            this.$('.panels .container').style.transform = `translateY(-${offset+16}px)`
-        } else if (offset < 0) {
-            let offset = this.$('.panels .panel-lyrics').offsetHeight / 2 - node.offsetTop
-            this.$('.panels .container').style.transform = `translateY(${offset-16}px)`
-        }
-        this.$$('.panels .container p').forEach(node => node.classList.remove('current'))
+        let translateY = node.offsetTop - this.$('.panel-lyrics').offsetHeight / 2
+        translateY = translateY > 0 ? translateY : 0
+        this.$('.panel-lyrics .container').style.transform = `translateY(-${translateY}px)`
+        this.$$('.panel-lyrics p').forEach(node => node.classList.remove('current'))
         node.classList.add('current')
     }
 
-    setProgressBar() {        
+    setProgerssBar() {
         let percent = (this.audio.currentTime * 100 / this.audio.duration) + '%'
         this.$('.bar .progress').style.width = percent
         this.$('.time-start').innerText = this.formateTime(this.audio.currentTime)
@@ -170,6 +165,8 @@ class Player {
         seconds = seconds >= 10 ? '' + seconds : '0' + seconds
         return minutes + ':' + seconds
     }
+
 }
+
 
 window.p = new Player('#player')

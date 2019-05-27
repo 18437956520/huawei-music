@@ -122,12 +122,13 @@ p {
                 text-align: center;
 
                 p {
-                    font-size: 13px;
+                    font-size: 14px;
                     color: $color1;
                     margin-top: 8px;
 
                     &.current {
                         color: $color;
+                        font-size: 16px;
                     }
                 }
             }
@@ -194,10 +195,10 @@ p {
                 height: 4px;
                 background: $color3;
                 border-radius: 2px;
-                margin: 0 10px;
+                margin: 0 20px;
 
                 .progress {
-                    width: 30%;
+                    width: 0%;
                     height: 100%;
                     border-radius: 2px;
                     background: $color2;

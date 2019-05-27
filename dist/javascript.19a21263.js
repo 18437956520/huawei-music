@@ -294,7 +294,7 @@ function () {
     this.lyricsArr = [];
     this.lyricIndex = -1;
     this.start();
-    this.bind();
+    this.bind(); // https://yyyh.info/huawei-music-list/music-list.json
   }
 
   _createClass(Player, [{
@@ -307,7 +307,7 @@ function () {
       }).then(function (data) {
         _this2.songList = data;
 
-        _this2.renderSong();
+        _this2.loadSong();
       });
     }
   }, {
@@ -330,22 +330,26 @@ function () {
       };
 
       this.$('.btn-pre').onclick = function () {
-        self.playPrevSong();
         self.$('.btn-play').classList.remove('pause');
         self.$('.btn-play').classList.add('playing');
         self.$('.btn-play').querySelector('use').setAttribute('xlink:href', '#icon-pause');
+        self.currentIndex = (self.songList.length + self.currentIndex - 1) % self.songList.length;
+        self.loadSong();
+        self.playSong();
       };
 
       this.$('.btn-next').onclick = function () {
-        self.playNextSong();
         self.$('.btn-play').classList.remove('pause');
         self.$('.btn-play').classList.add('playing');
         self.$('.btn-play').querySelector('use').setAttribute('xlink:href', '#icon-pause');
+        self.currentIndex = (self.currentIndex + 1) % self.songList.length;
+        self.loadSong();
+        self.playSong();
       };
 
       this.audio.ontimeupdate = function () {
-        self.renderSong();
-        self.setProgressBar();
+        self.locateLyric();
+        self.setProgerssBar();
       };
 
       var swiper = new _swiper.default(this.$('.panels'));
@@ -359,8 +363,8 @@ function () {
       });
     }
   }, {
-    key: "renderSong",
-    value: function renderSong() {
+    key: "loadSong",
+    value: function loadSong() {
       var _this3 = this;
 
       var songObj = this.songList[this.currentIndex];
@@ -375,40 +379,23 @@ function () {
       this.loadLyric();
     }
   }, {
-    key: "playPrevSong",
-    value: function playPrevSong() {
+    key: "playSong",
+    value: function playSong() {
       var _this4 = this;
-
-      this.currentIndex = (this.songList.length + this.currentIndex - 1) % this.songList.length;
-      this.audio.src = this.songList[this.currentIndex].url;
-      console.log(this.audio);
 
       this.audio.oncanplaythrough = function () {
         return _this4.audio.play();
       };
     }
   }, {
-    key: "playNextSong",
-    value: function playNextSong() {
-      var _this5 = this;
-
-      this.currentIndex = (this.songList.length + this.currentIndex + 1) % this.songList.length;
-      this.audio.src = this.songList[this.currentIndex].url;
-      console.log(this.audio);
-
-      this.audio.oncanplaythrough = function () {
-        return _this5.audio.play();
-      };
-    }
-  }, {
     key: "loadLyric",
     value: function loadLyric() {
-      var _this6 = this;
+      var _this5 = this;
 
       fetch(this.songList[this.currentIndex].lyric).then(function (res) {
         return res.json();
       }).then(function (data) {
-        _this6.setLyrics(data.lrc.lyric);
+        _this5.setLyrics(data.lrc.lyric);
 
         window.lyrics = data.lrc.lyric;
       });
@@ -422,9 +409,9 @@ function () {
       if (currentTime > nextLineTime && this.lyricIndex < this.lyricsArr.length - 1) {
         this.lyricIndex++;
         var node = this.$('[data-time="' + this.lyricsArr[this.lyricIndex][0] + '"]');
-        this.setLyricToCenter(node);
-        this.$$('.panel-effect .lyric p')[0].innerText = this.lyricsArr[this.lyricIndex][1];
-        this.$$('.panel-effect .lyric p')[1].innerText = this.lyricsArr[this.lyricIndex + 1] ? this.lyricsArr[this.lyricIndex + 1][1] : '';
+        if (node) this.setLyricToCenter(node);
+        this.$$('.panel-effect .lyrics p')[0].innerText = this.lyricsArr[this.lyricIndex][1];
+        this.$$('.panel-effect .lyrics p')[1].innerText = this.lyricsArr[this.lyricIndex + 1] ? this.lyricsArr[this.lyricIndex + 1][1] : '';
       }
     }
   }, {
@@ -440,11 +427,13 @@ function () {
         var str = line.replace(/\[.+?\]/g, '');
         line.match(/\[.+?\]/g).forEach(function (t) {
           t = t.replace(/[\[\]]/g, '');
-          var milliseconds = parseInt(t.slice(0, 2) * 60 * 1000 + parseInt(t.slice(3, 5)) * 1000 + parseInt(t.slice(6)));
+          var milliseconds = parseInt(t.slice(0, 2)) * 60 * 1000 + parseInt(t.slice(3, 5)) * 1000 + parseInt(t.slice(6));
           lyricsArr.push([milliseconds, str]);
         });
       });
-      lyricsArr.sort(function (v1, v2) {
+      lyricsArr.filter(function (line) {
+        return line[1].trim() !== '';
+      }).sort(function (v1, v2) {
         if (v1[0] > v2[0]) {
           return 1;
         } else {
@@ -462,24 +451,17 @@ function () {
   }, {
     key: "setLyricToCenter",
     value: function setLyricToCenter(node) {
-      var offset = node.offsetTop - this.$('.panels .panel-lyrics').offsetHeight / 2;
-
-      if (offset > 0) {
-        this.$('.panels .container').style.transform = "translateY(-".concat(offset + 16, "px)");
-      } else if (offset < 0) {
-        var _offset = this.$('.panels .panel-lyrics').offsetHeight / 2 - node.offsetTop;
-
-        this.$('.panels .container').style.transform = "translateY(".concat(_offset - 16, "px)");
-      }
-
-      this.$$('.panels .container p').forEach(function (node) {
+      var translateY = node.offsetTop - this.$('.panel-lyrics').offsetHeight / 2;
+      translateY = translateY > 0 ? translateY : 0;
+      this.$('.panel-lyrics .container').style.transform = "translateY(-".concat(translateY, "px)");
+      this.$$('.panel-lyrics p').forEach(function (node) {
         return node.classList.remove('current');
       });
       node.classList.add('current');
     }
   }, {
-    key: "setProgressBar",
-    value: function setProgressBar() {
+    key: "setProgerssBar",
+    value: function setProgerssBar() {
       var percent = this.audio.currentTime * 100 / this.audio.duration + '%';
       this.$('.bar .progress').style.width = percent;
       this.$('.time-start').innerText = this.formateTime(this.audio.currentTime);
@@ -527,7 +509,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56603" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64398" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

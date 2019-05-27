@@ -102,12 +102,13 @@ p {
   text-align: center;
 }
 #player .panels .panel-effect .lyrics p {
-  font-size: 13px;
+  font-size: 14px;
   color: #868AAF;
   margin-top: 8px;
 }
 #player .panels .panel-effect .lyrics p.current {
   color: #FFFFFF;
+  font-size: 16px;
 }
 #player .panels .panel-lyrics {
   width: 100vw;
@@ -161,10 +162,10 @@ p {
   height: 4px;
   background: #0315FF;
   border-radius: 2px;
-  margin: 0 10px;
+  margin: 0 20px;
 }
 #player .footer .bar-area .bar .progress {
-  width: 30%;
+  width: 0%;
   height: 100%;
   border-radius: 2px;
   background: #FD0DAD;
