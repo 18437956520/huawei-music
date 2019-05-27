@@ -3,6 +3,10 @@ import './icons.js'
 const $ = selector => document.querySelector(selector)
 const $$ = selector => document.querySelectorAll(selector)
 
+// function $(selector){
+//     return document.querySelector(selector)
+// }
+
 class Player {
     constructor(node) {
         this.root = typeof node === 'string' ? $(node) : node
@@ -40,22 +44,30 @@ class Player {
             }
         }
 
-        this.root.querySelector('.btn-pre').onclick = function(){
+        this.root.querySelector('.btn-pre').onclick = function () {
             self.playPrevSong()
+            self.root.querySelector('.btn-play-pause').classList.remove('pause')
+            self.root.querySelector('.btn-play-pause').classList.add('playing')
+            self.root.querySelector('.btn-play-pause').querySelector('use').setAttribute('xlink:href', '#icon-pause')
         }
-        this.root.querySelector('.btn-next').onclick = function(){
+        this.root.querySelector('.btn-next').onclick = function () {
             self.playNextSong()
+            self.root.querySelector('.btn-play-pause').classList.remove('pause')
+            self.root.querySelector('.btn-play-pause').classList.add('playing')
+            self.root.querySelector('.btn-play-pause').querySelector('use').setAttribute('xlink:href', '#icon-pause')
         }
     }
 
     playPrevSong() {
         this.currentIndex = (this.songList.length + this.currentIndex - 1) % this.songList.length
         this.audio.src = this.songList[this.currentIndex].url
+        console.log(this.audio)
         this.audio.play()
     }
     playNextSong() {
         this.currentIndex = (this.songList.length + this.currentIndex + 1) % this.songList.length
         this.audio.src = this.songList[this.currentIndex].url
+        console.log(this.audio)
         this.audio.play()
     }
 }
