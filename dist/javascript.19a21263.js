@@ -152,15 +152,32 @@ function () {
     _classCallCheck(this, Player);
 
     this.root = typeof node === 'string' ? $(node) : node;
+    this.songList = [];
+    this.currentIndex = 0;
+    this.start(); //https://yyyh.info/huawei-music-list/music-list.json
   }
 
   _createClass(Player, [{
+    key: "start",
+    value: function start() {
+      var _this = this;
+
+      fetch('https://yyyh.info/huawei-music-list/music-list.json').then(function (res) {
+        return res.json();
+      }).then(function (data) {
+        console.log(data);
+        _this.songList = data;
+      });
+    }
+  }, {
     key: "bind",
     value: function bind() {}
   }]);
 
   return Player;
 }();
+
+new Player('#player');
 },{"./icons.js":"src/javascript/icons.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
