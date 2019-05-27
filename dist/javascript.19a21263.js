@@ -154,7 +154,9 @@ function () {
     this.root = typeof node === 'string' ? $(node) : node;
     this.songList = [];
     this.currentIndex = 0;
-    this.start(); //https://yyyh.info/huawei-music-list/music-list.json
+    this.audio = new Audio();
+    this.start();
+    this.bind(); //https://yyyh.info/huawei-music-list/music-list.json
   }
 
   _createClass(Player, [{
@@ -171,7 +173,19 @@ function () {
     }
   }, {
     key: "bind",
-    value: function bind() {}
+    value: function bind() {
+      var self = this;
+
+      this.root.querySelector('.btn-play-pause').onclick = function () {
+        self.playSong();
+      };
+    }
+  }, {
+    key: "playSong",
+    value: function playSong() {
+      this.audio.src = this.songList[this.currentIndex].url;
+      this.audio.play();
+    }
   }]);
 
   return Player;
