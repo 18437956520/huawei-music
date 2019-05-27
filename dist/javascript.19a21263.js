@@ -402,14 +402,14 @@ function () {
       var offset = node.offsetTop - this.$('.panels .panel-lyrics').offsetHeight / 2;
 
       if (offset > 0) {
-        this.$('.panels .container').style.transform = "translateY(-".concat(offset, "px)");
+        this.$('.panels .container').style.transform = "translateY(-".concat(offset + 16, "px)");
       } else if (offset < 0) {
         var _offset = this.$('.panels .panel-lyrics').offsetHeight / 2 - node.offsetTop;
 
-        this.$('.panels .container').style.transform = "translateY(".concat(_offset, "px)");
+        this.$('.panels .container').style.transform = "translateY(".concat(_offset - 16, "px)");
       }
 
-      this.$('.panels .container p').classList.forEach(function (node) {
+      this.$$('.panels .container p').forEach(function (node) {
         return node.classList.remove('current');
       });
       node.classList.add('current');

@@ -96,12 +96,12 @@ class Player {
     setLineToCenter(node){
         let offset = node.offsetTop - this.$('.panels .panel-lyrics').offsetHeight/2
         if(offset > 0){
-            this.$('.panels .container').style.transform = `translateY(-${offset}px)`
+            this.$('.panels .container').style.transform = `translateY(-${offset+16}px)`
         } else if(offset < 0){
             let offset = this.$('.panels .panel-lyrics').offsetHeight/2 - node.offsetTop
-            this.$('.panels .container').style.transform = `translateY(${offset}px)`
+            this.$('.panels .container').style.transform = `translateY(${offset-16}px)`
         }
-        this.$('.panels .container p').classList.forEach(node => node.classList.remove('current'))
+        this.$$('.panels .container p').forEach(node => node.classList.remove('current'))
         node.classList.add('current')
     }
 }

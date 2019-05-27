@@ -4,7 +4,7 @@
 }
 
 body {
-  background-color: #090A42;
+  background-color: #090a42;
   font-family: "regular";
 }
 
@@ -19,6 +19,7 @@ p {
 #player .header {
   text-align: center;
   height: 110px;
+  background: linear-gradient(to bottom, #1b1e75 0%, #090a42 100%);
 }
 #player .header h1 {
   color: #FFFFFF;
@@ -124,9 +125,11 @@ p {
 }
 #player .panels .panel-lyrics .container p.current {
   color: #FFFFFF;
+  font-size: 16px;
 }
 #player .footer {
   height: 160px;
+  background: linear-gradient(to bottom, #090a42 0%, #1b1e75 100%);
 }
 #player .footer .buttons {
   display: flex;
