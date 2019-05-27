@@ -136,6 +136,18 @@ p {
         .panel-lyrics {
             width: 100vw;
             height: 100%;
+            text-align: center;
+            line-height: 2;
+            overflow: hidden;
+            
+            p{
+                font-size: 14px;
+                color: $color1;
+
+                &.current{
+                    color: $color;
+                }
+            }
         }
     }
 

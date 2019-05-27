@@ -111,6 +111,16 @@ p {
 #player .panels .panel-lyrics {
   width: 100vw;
   height: 100%;
+  text-align: center;
+  line-height: 2;
+  overflow: hidden;
+}
+#player .panels .panel-lyrics p {
+  font-size: 14px;
+  color: #868AAF;
+}
+#player .panels .panel-lyrics p.current {
+  color: #FFFFFF;
 }
 #player .footer {
   height: 160px;
