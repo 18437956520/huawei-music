@@ -27,12 +27,12 @@ class Player {
     bind() {
         let self = this
         this.root.querySelector('.btn-play-pause').onclick = function () {
-            if(this.classList.contains('playing')){
+            if (this.classList.contains('playing')) {
                 self.audio.pause()
                 this.classList.remove('playing')
                 this.classList.add('pause')
                 this.querySelector('use').setAttribute('xlink:href', '#icon-play')
-            }else if(this.classList.contains('pause')){
+            } else if (this.classList.contains('pause')) {
                 self.audio.play()
                 this.classList.remove('pause')
                 this.classList.add('playing')
