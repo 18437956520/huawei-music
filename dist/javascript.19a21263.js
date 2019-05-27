@@ -190,10 +190,27 @@ function () {
           this.querySelector('use').setAttribute('xlink:href', '#icon-pause');
         }
       };
+
+      this.root.querySelector('.btn-pre').onclick = function () {
+        self.playPrevSong();
+      };
+
+      this.root.querySelector('.btn-next').onclick = function () {
+        self.playNextSong();
+      };
     }
   }, {
-    key: "playSong",
-    value: function playSong() {
+    key: "playPrevSong",
+    value: function playPrevSong() {
+      this.currentIndex = (this.songList.length + this.currentIndex - 1) % this.songList.length;
+      this.audio.src = this.songList[this.currentIndex].url;
+      this.audio.play();
+    }
+  }, {
+    key: "playNextSong",
+    value: function playNextSong() {
+      this.currentIndex = (this.songList.length + this.currentIndex + 1) % this.songList.length;
+      this.audio.src = this.songList[this.currentIndex].url;
       this.audio.play();
     }
   }]);
