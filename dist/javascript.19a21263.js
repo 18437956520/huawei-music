@@ -305,7 +305,8 @@ function () {
       }).then(function (data) {
         console.log(data);
         _this2.songList = data;
-        _this2.audio.src = _this2.songList[_this2.currentIndex].url;
+
+        _this2.renderSong();
       });
     }
   }, {
@@ -352,20 +353,48 @@ function () {
       });
     }
   }, {
+    key: "renderSong",
+    value: function renderSong() {
+      var songObj = this.songList[this.currentIndex];
+      this.$('.header h1').innerText = songObj.title;
+      this.$('.header p').innerText = songObj.author + '-' + songObj.albumn;
+      this.audio.src = songObj.url;
+      this.loadLyrics();
+    }
+  }, {
     key: "playPrevSong",
     value: function playPrevSong() {
+      var _this3 = this;
+
       this.currentIndex = (this.songList.length + this.currentIndex - 1) % this.songList.length;
       this.audio.src = this.songList[this.currentIndex].url;
       console.log(this.audio);
-      this.audio.play();
+
+      this.audio.oncanplaythrough = function () {
+        return _this3.audio.play();
+      };
     }
   }, {
     key: "playNextSong",
     value: function playNextSong() {
+      var _this4 = this;
+
       this.currentIndex = (this.songList.length + this.currentIndex + 1) % this.songList.length;
       this.audio.src = this.songList[this.currentIndex].url;
       console.log(this.audio);
-      this.audio.play();
+
+      this.audio.oncanplaythrough = function () {
+        return _this4.audio.play();
+      };
+    }
+  }, {
+    key: "loadLyrics",
+    value: function loadLyrics() {
+      fetch(this.songList[this.currentIndex].lyric).then(function (res) {
+        return res.json();
+      }).then(function (data) {
+        console.log(data.lrc.lyric);
+      });
     }
   }]);
 

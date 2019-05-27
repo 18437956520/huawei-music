@@ -20,7 +20,7 @@ class Player {
             .then(data => {
                 console.log(data)
                 this.songList = data
-                this.audio.src = this.songList[this.currentIndex].url
+                this.renderSong()
             })
     }
 
@@ -54,27 +54,43 @@ class Player {
         }
 
         let swiper = new Swiper(this.$('.panels'))
-        swiper.on('swipLeft', function() {
+        swiper.on('swipLeft', function () {
             this.classList.remove('panel1')
             this.classList.add('panel2')
         })
-        swiper.on('swipRight', function() {
+        swiper.on('swipRight', function () {
             this.classList.remove('panel2')
             this.classList.add('panel1')
         })
+    }
+
+    renderSong(){
+        let songObj = this.songList[this.currentIndex]
+        this.$('.header h1').innerText = songObj.title
+        this.$('.header p').innerText = songObj.author + '-' + songObj.albumn
+        this.audio.src = songObj.url
+        this.loadLyrics()
     }
 
     playPrevSong() {
         this.currentIndex = (this.songList.length + this.currentIndex - 1) % this.songList.length
         this.audio.src = this.songList[this.currentIndex].url
         console.log(this.audio)
-        this.audio.play()
+        this.audio.oncanplaythrough = () =>this.audio.play()
     }
     playNextSong() {
         this.currentIndex = (this.songList.length + this.currentIndex + 1) % this.songList.length
         this.audio.src = this.songList[this.currentIndex].url
         console.log(this.audio)
-        this.audio.play()
+        this.audio.oncanplaythrough = () =>this.audio.play()
+    }
+
+    loadLyrics() {
+        fetch(this.songList[this.currentIndex].lyric)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data.lrc.lyric)
+            })
     }
 }
 
