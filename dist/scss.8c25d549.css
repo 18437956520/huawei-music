@@ -115,11 +115,14 @@ p {
   line-height: 2;
   overflow: hidden;
 }
-#player .panels .panel-lyrics p {
+#player .panels .panel-lyrics .container {
+  transition: all 0.3s;
+}
+#player .panels .panel-lyrics .container p {
   font-size: 14px;
   color: #868AAF;
 }
-#player .panels .panel-lyrics p.current {
+#player .panels .panel-lyrics .container p.current {
   color: #FFFFFF;
 }
 #player .footer {

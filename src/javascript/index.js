@@ -92,6 +92,18 @@ class Player {
                 console.log(data.lrc.lyric)
             })
     }
+
+    setLineToCenter(node){
+        let offset = node.offsetTop - this.$('.panels .panel-lyrics').offsetHeight/2
+        if(offset > 0){
+            this.$('.panels .container').style.transform = `translateY(-${offset}px)`
+        } else if(offset < 0){
+            let offset = this.$('.panels .panel-lyrics').offsetHeight/2 - node.offsetTop
+            this.$('.panels .container').style.transform = `translateY(${offset}px)`
+        }
+        this.$('.panels .container p').classList.forEach(node => node.classList.remove('current'))
+        node.classList.add('current')
+    }
 }
 
-new Player('#player')
+window.p = new Player('#player')

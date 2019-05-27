@@ -139,13 +139,16 @@ p {
             text-align: center;
             line-height: 2;
             overflow: hidden;
-            
-            p{
-                font-size: 14px;
-                color: $color1;
 
-                &.current{
-                    color: $color;
+            .container {
+                transition: all 0.3s;
+                p {
+                    font-size: 14px;
+                    color: $color1;
+
+                    &.current {
+                        color: $color;
+                    }
                 }
             }
         }

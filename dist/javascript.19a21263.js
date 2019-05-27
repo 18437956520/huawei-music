@@ -396,12 +396,30 @@ function () {
         console.log(data.lrc.lyric);
       });
     }
+  }, {
+    key: "setLineToCenter",
+    value: function setLineToCenter(node) {
+      var offset = node.offsetTop - this.$('.panels .panel-lyrics').offsetHeight / 2;
+
+      if (offset > 0) {
+        this.$('.panels .container').style.transform = "translateY(-".concat(offset, "px)");
+      } else if (offset < 0) {
+        var _offset = this.$('.panels .panel-lyrics').offsetHeight / 2 - node.offsetTop;
+
+        this.$('.panels .container').style.transform = "translateY(".concat(_offset, "px)");
+      }
+
+      this.$('.panels .container p').classList.forEach(function (node) {
+        return node.classList.remove('current');
+      });
+      node.classList.add('current');
+    }
   }]);
 
   return Player;
 }();
 
-new Player('#player');
+window.p = new Player('#player');
 },{"./icons.js":"src/javascript/icons.js","./swiper.js":"src/javascript/swiper.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
