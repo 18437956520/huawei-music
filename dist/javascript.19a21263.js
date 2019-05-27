@@ -169,6 +169,7 @@ function () {
       }).then(function (data) {
         console.log(data);
         _this.songList = data;
+        _this.audio.src = _this.songList[_this.currentIndex].url;
       });
     }
   }, {
@@ -177,13 +178,22 @@ function () {
       var self = this;
 
       this.root.querySelector('.btn-play-pause').onclick = function () {
-        self.playSong();
+        if (this.classList.contains('playing')) {
+          self.audio.pause();
+          this.classList.remove('playing');
+          this.classList.add('pause');
+          this.querySelector('use').setAttribute('xlink:href', '#icon-play');
+        } else if (this.classList.contains('pause')) {
+          self.audio.play();
+          this.classList.remove('pause');
+          this.classList.add('playing');
+          this.querySelector('use').setAttribute('xlink:href', '#icon-pause');
+        }
       };
     }
   }, {
     key: "playSong",
     value: function playSong() {
-      this.audio.src = this.songList[this.currentIndex].url;
       this.audio.play();
     }
   }]);
@@ -220,7 +230,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49940" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51505" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

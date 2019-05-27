@@ -20,18 +20,28 @@ class Player {
             .then(data => {
                 console.log(data)
                 this.songList = data
+                this.audio.src = this.songList[this.currentIndex].url
             })
     }
 
     bind() {
         let self = this
         this.root.querySelector('.btn-play-pause').onclick = function () {
-            self.playSong()    
+            if(this.classList.contains('playing')){
+                self.audio.pause()
+                this.classList.remove('playing')
+                this.classList.add('pause')
+                this.querySelector('use').setAttribute('xlink:href', '#icon-play')
+            }else if(this.classList.contains('pause')){
+                self.audio.play()
+                this.classList.remove('pause')
+                this.classList.add('playing')
+                this.querySelector('use').setAttribute('xlink:href', '#icon-pause')
+            }
         }
     }
 
     playSong() {
-        this.audio.src = this.songList[this.currentIndex].url
         this.audio.play()
     }
 }
