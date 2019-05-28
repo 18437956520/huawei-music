@@ -119,6 +119,7 @@ p {
 }
 #player .panels .panel-effect .lyrics {
   text-align: center;
+  height: 9vh;
 }
 #player .panels .panel-effect .lyrics p {
   font-size: 14px;
