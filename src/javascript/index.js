@@ -33,11 +33,13 @@ class Player {
         this.$('.btn-play').onclick = function () {
             if (this.classList.contains('playing')) {
                 self.audio.pause()
+                self.rotatePause()
                 this.classList.remove('playing')
                 this.classList.add('pause')
                 this.querySelector('use').setAttribute('xlink:href', '#icon-play')
             } else if (this.classList.contains('pause')) {
                 self.audio.play()
+                self.rotatePlay()
                 this.classList.remove('pause')
                 this.classList.add('playing')
                 this.querySelector('use').setAttribute('xlink:href', '#icon-pause')
@@ -45,38 +47,78 @@ class Player {
         }
 
         this.$('.btn-pre').onclick = function () {
-            self.$('.btn-play').classList.remove('pause')
-            self.$('.btn-play').classList.add('playing')
-            self.$('.btn-play').querySelector('use').setAttribute('xlink:href', '#icon-pause')
+            self.rotatePlay()
+            self.autoPlay()
             self.currentIndex = (self.songList.length + self.currentIndex - 1) % self.songList.length
             self.loadSong()
             self.playSong()
         }
 
         this.$('.btn-next').onclick = function () {
-            self.$('.btn-play').classList.remove('pause')
-            self.$('.btn-play').classList.add('playing')
-            self.$('.btn-play').querySelector('use').setAttribute('xlink:href', '#icon-pause')
+            self.rotatePlay()
+            self.autoPlay()
             self.currentIndex = (self.currentIndex + 1) % self.songList.length
             self.loadSong()
             self.playSong()
         }
+
+
 
         this.audio.ontimeupdate = function () {
             self.locateLyric()
             self.setProgerssBar()
         }
 
-        let swiper = new Swiper(this.$('.panels'))
-        swiper.on('swipLeft', function () {
+        let swiperPanels = new Swiper(this.$('.panels'))
+        swiperPanels.on('swipLeft', function () {
             this.classList.remove('panel1')
             this.classList.add('panel2')
+            self.ballRightHighlight()
         })
 
-        swiper.on('swipRight', function () {
+        swiperPanels.on('swipRight', function () {
             this.classList.remove('panel2')
             this.classList.add('panel1')
+            self.ballLeftHighlight()            
         })
+    }
+    
+    ballLeftHighlight(){
+        this.$('.ball-left').classList.add('current')
+        this.$('.ball-left').classList.remove('normal')        
+        this.$('.ball-right').classList.add('normal')        
+        this.$('.ball-right').classList.remove('current')        
+    }
+
+    ballRightHighlight(){
+        this.$('.ball-right').classList.add('current')
+        this.$('.ball-right').classList.remove('normal')
+        this.$('.ball-left').classList.add('normal')
+        this.$('.ball-left').classList.remove('current')
+    }
+
+    rotatePlay(){
+        this.$('.effect-1').classList.remove('pause')
+        this.$('.effect-2').classList.remove('pause')
+        this.$('.effect-3').classList.remove('pause')
+        this.$('.effect-1').classList.add('playing')
+        this.$('.effect-2').classList.add('playing')
+        this.$('.effect-3').classList.add('playing')
+    }
+
+    rotatePause(){
+        this.$('.effect-1').classList.remove('playing')
+        this.$('.effect-2').classList.remove('playing')
+        this.$('.effect-3').classList.remove('playing')
+        this.$('.effect-1').classList.add('pause')
+        this.$('.effect-2').classList.add('pause')
+        this.$('.effect-3').classList.add('pause')
+    }
+
+    autoPlay(){
+        this.$('.btn-play').classList.remove('pause')
+        this.$('.btn-play').classList.add('playing')
+        this.$('.btn-play').querySelector('use').setAttribute('xlink:href', '#icon-pause')
     }
 
     loadSong() {

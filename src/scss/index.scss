@@ -52,6 +52,7 @@ p {
                 border-radius: 50%;
                 background: $color2-darker;
                 margin: 0 4px;
+                transition: all 0.5s;
 
                 &.current {
                     width: 8px;
@@ -101,6 +102,13 @@ p {
                     width: 70vw;
                     height: 70vw;
                     animation: rotate 10s linear infinite;
+                        &.pause{
+                            animation-play-state: paused;
+                        }
+                        &.playing{
+                            animation-play-state: running;
+                            
+                        }
                 }
 
                 .effect-2 {
@@ -108,6 +116,12 @@ p {
                     width: 55vw;
                     height: 55vw;
                     animation: rotate 10s linear infinite reverse;
+                    &.pause{
+                        animation-play-state: paused;
+                    }
+                    &.playing{
+                        animation-play-state: running;
+                    }
                 }
 
                 .effect-3 {
@@ -115,6 +129,12 @@ p {
                     height: 22vw;
                     width: 22vw;
                     animation: rotate 10s linear infinite;
+                    &.pause{
+                        animation-play-state: paused;
+                    }
+                    &.playing{
+                        animation-play-state: running;
+                    }
                 }
             }
 

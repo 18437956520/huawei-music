@@ -43,6 +43,7 @@ p {
   border-radius: 50%;
   background: #70014b;
   margin: 0 4px;
+  transition: all 0.5s;
 }
 #player .header .balls span.current {
   width: 8px;
@@ -86,17 +87,35 @@ p {
   height: 70vw;
   animation: rotate 10s linear infinite;
 }
+#player .panels .panel-effect .effect .effect-1.pause {
+  animation-play-state: paused;
+}
+#player .panels .panel-effect .effect .effect-1.playing {
+  animation-play-state: running;
+}
 #player .panels .panel-effect .effect .effect-2 {
   background: url(/effect-move1.8d0ce205.svg) 0 0 no-repeat;
   width: 55vw;
   height: 55vw;
   animation: rotate 10s linear infinite reverse;
 }
+#player .panels .panel-effect .effect .effect-2.pause {
+  animation-play-state: paused;
+}
+#player .panels .panel-effect .effect .effect-2.playing {
+  animation-play-state: running;
+}
 #player .panels .panel-effect .effect .effect-3 {
   background: url(/effect-move2.143040a0.svg) 0 0 no-repeat;
   height: 22vw;
   width: 22vw;
   animation: rotate 10s linear infinite;
+}
+#player .panels .panel-effect .effect .effect-3.pause {
+  animation-play-state: paused;
+}
+#player .panels .panel-effect .effect .effect-3.playing {
+  animation-play-state: running;
 }
 #player .panels .panel-effect .lyrics {
   text-align: center;
