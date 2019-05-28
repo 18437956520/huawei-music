@@ -104,7 +104,7 @@ class Player {
     locateLyric() {
         let currentTime = this.audio.currentTime * 1000
         let nextLineTime = this.lyricsArr[this.lyricIndex + 1][0]
-        if (currentTime > nextLineTime && this.lyricIndex < this.lyricsArr.length - 1) {
+        if (currentTime >= nextLineTime && this.lyricIndex < this.lyricsArr.length - 1) {
             this.lyricIndex++
             let node = this.$('[data-time="' + this.lyricsArr[this.lyricIndex][0] + '"]')
             if (node) this.setLyricToCenter(node)
@@ -147,9 +147,9 @@ class Player {
 
     setLyricToCenter(node) {
         let translateY = node.offsetTop - this.$('.panel-lyrics').offsetHeight / 2
-        if(translateY>0){
+        if (translateY > 0) {
             this.$('.panel-lyrics .container').style.transform = `translateY(-${translateY}px)`
-        }else if(translateY<0){
+        } else if (translateY < 0) {
             this.$('.panel-lyrics .container').style.transform = `translateY(${-translateY}px)`
         }
         this.$$('.panel-lyrics p').forEach(node => node.classList.remove('current'))

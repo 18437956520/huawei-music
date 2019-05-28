@@ -270,6 +270,8 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+console.log('hello music');
+
 var Player =
 /*#__PURE__*/
 function () {
@@ -406,7 +408,7 @@ function () {
       var currentTime = this.audio.currentTime * 1000;
       var nextLineTime = this.lyricsArr[this.lyricIndex + 1][0];
 
-      if (currentTime > nextLineTime && this.lyricIndex < this.lyricsArr.length - 1) {
+      if (currentTime >= nextLineTime && this.lyricIndex < this.lyricsArr.length - 1) {
         this.lyricIndex++;
         var node = this.$('[data-time="' + this.lyricsArr[this.lyricIndex][0] + '"]');
         if (node) this.setLyricToCenter(node);
@@ -514,7 +516,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57665" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61843" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
