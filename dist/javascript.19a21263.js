@@ -452,8 +452,13 @@ function () {
     key: "setLyricToCenter",
     value: function setLyricToCenter(node) {
       var translateY = node.offsetTop - this.$('.panel-lyrics').offsetHeight / 2;
-      translateY = translateY > 0 ? translateY : 0;
-      this.$('.panel-lyrics .container').style.transform = "translateY(-".concat(translateY, "px)");
+
+      if (translateY > 0) {
+        this.$('.panel-lyrics .container').style.transform = "translateY(-".concat(translateY, "px)");
+      } else if (translateY < 0) {
+        this.$('.panel-lyrics .container').style.transform = "translateY(".concat(-translateY, "px)");
+      }
+
       this.$$('.panel-lyrics p').forEach(function (node) {
         return node.classList.remove('current');
       });
@@ -509,7 +514,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49616" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57665" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -146,8 +146,11 @@ class Player {
 
     setLyricToCenter(node) {
         let translateY = node.offsetTop - this.$('.panel-lyrics').offsetHeight / 2
-        translateY = translateY > 0 ? translateY : 0
-        this.$('.panel-lyrics .container').style.transform = `translateY(-${translateY}px)`
+        if(translateY>0){
+            this.$('.panel-lyrics .container').style.transform = `translateY(-${translateY}px)`
+        }else if(translateY<0){
+            this.$('.panel-lyrics .container').style.transform = `translateY(${-translateY}px)`
+        }
         this.$$('.panel-lyrics p').forEach(node => node.classList.remove('current'))
         node.classList.add('current')
     }
